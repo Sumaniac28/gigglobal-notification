@@ -1,11 +1,10 @@
 import { Client } from '@elastic/elasticsearch';
 import { ClusterHealthHealthResponseBody } from '@elastic/elasticsearch/lib/api/types';
 import { config } from '@notifications/config';
-import { winstonLogger } from '@sumaniac28/gigglobal-helper';
+import { winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import { Logger } from 'winston';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationElasticSearchServer', 'debug');
-console.log(`${config.ELASTIC_SEARCH_URL}`);
 const elasticSearchClient = new Client({
   node: `${config.ELASTIC_SEARCH_URL}`,
   auth: {

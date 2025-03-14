@@ -1,4 +1,4 @@
-import { IEmailLocals, winstonLogger } from '@sumaniac28/gigglobal-helper';
+import { IEmailLocals, winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import { config } from '@notifications/config';
 import { Logger } from 'winston';
 import nodemailer, { Transporter } from 'nodemailer';

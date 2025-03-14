@@ -1,5 +1,5 @@
 import { config } from '@notifications/config';
-import { IEmailLocals, winstonLogger } from '@sumaniac28/gigglobal-helper';
+import { IEmailLocals, winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import { Channel, ConsumeMessage } from 'amqplib';
 import { Logger } from 'winston';
 import { createConnection } from '@notifications/queues/connection';
@@ -12,7 +12,7 @@ async function consumeAuthEmailMessages(channel: Channel): Promise<void> {
     if (!channel) {
       channel = (await createConnection()) as Channel;
     }
-    const exchangeName = 'GigGlobal-email-notification';
+    const exchangeName = '  ';
     const routingKey = 'auth-email';
     const queueName = 'auth-email-queue';
     await channel.assertExchange(exchangeName, 'direct');

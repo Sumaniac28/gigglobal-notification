@@ -1,4 +1,4 @@
-import { winstonLogger } from '@sumaniac28/gigglobal-helper';
+import { winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import { Logger } from 'winston';
 import { config } from '@notifications/config';
 import express, { Express } from 'express';

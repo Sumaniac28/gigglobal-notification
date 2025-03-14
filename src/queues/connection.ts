@@ -1,5 +1,5 @@
 import { config } from '@notifications/config';
-import { winstonLogger } from '@sumaniac28/gigglobal-helper';
+import { winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import client, { Channel, Connection } from 'amqplib';
 import { Logger } from 'winston';
 
