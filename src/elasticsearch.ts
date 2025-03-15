@@ -4,13 +4,19 @@ import { config } from '@notifications/config';
 import { winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import { Logger } from 'winston';
 
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationElasticSearchServer', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'notificationElasticSearchServer',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 const elasticSearchClient = new Client({
   node: `${config.ELASTIC_SEARCH_URL}`,
   auth: {
-    username: config.ELASTIC_SEARCH_USERNAME, 
-    password: config.ELASTIC_SEARCH_PASSWORD, 
-  },
+    username: config.ELASTIC_SEARCH_USERNAME,
+    password: config.ELASTIC_SEARCH_PASSWORD
+  }
 });
 
 export async function checkConnection(): Promise<void> {

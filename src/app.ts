@@ -4,7 +4,13 @@ import { config } from '@notifications/config';
 import express, { Express } from 'express';
 import { start } from './server';
 
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationElasticSearchServer', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'notificationElasticSearchServer',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 
 function initialize(): void {
   const app: Express = express();

@@ -11,7 +11,13 @@ import { Channel } from 'amqplib';
 import { consumeAuthEmailMessages, consumeOrderEmailMessages } from '@notifications/queues/email.cosumer';
 
 const SERVER_PORT = 4001;
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationServer', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'notificationServer',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 
 export function start(app: Application): void {
   startServer(app);

@@ -3,7 +3,13 @@ import { winstonLogger } from '@sumaniac28/gigglobal-helper-v1';
 import client, { Channel, Connection } from 'amqplib';
 import { Logger } from 'winston';
 
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'notificationQueueConnection', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'notificationQueueConnection',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 
 async function createConnection(): Promise<Channel | undefined> {
   try {

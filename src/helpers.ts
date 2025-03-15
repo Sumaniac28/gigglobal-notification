@@ -5,7 +5,13 @@ import nodemailer, { Transporter } from 'nodemailer';
 import Email from 'email-templates';
 import path from 'path';
 
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'mailTransportHelper', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'mailTransportHelper',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 
 async function emailTemplates(template: string, to: string, locals: IEmailLocals): Promise<void> {
   try {

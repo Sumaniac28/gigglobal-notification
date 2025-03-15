@@ -5,7 +5,13 @@ import { Logger } from 'winston';
 import { createConnection } from '@notifications/queues/connection';
 import { sendEmail } from '@notifications/queues/mail.transport';
 
-const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'emailConsumer', 'debug');
+const log: Logger = winstonLogger(
+  `${config.ELASTIC_SEARCH_URL}`,
+  'emailConsumer',
+  'debug',
+  `${config.KIBANA_DASH_USERNAME}`,
+  `${config.KIBANA_DASH_PASSWORD}`
+);
 
 async function consumeAuthEmailMessages(channel: Channel): Promise<void> {
   try {
