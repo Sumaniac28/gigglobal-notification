@@ -14,8 +14,8 @@ const log: Logger = winstonLogger(
 const elasticSearchClient = new Client({
   node: `${config.ELASTIC_SEARCH_URL}`,
   auth: {
-    username: config.ELASTIC_SEARCH_USERNAME,
-    password: config.ELASTIC_SEARCH_PASSWORD
+    username: config.KIBANA_DASH_USERNAME || config.ELASTIC_SEARCH_USERNAME,
+    password: config.KIBANA_DASH_PASSWORD || config.ELASTIC_SEARCH_PASSWORD
   }
 });
 
