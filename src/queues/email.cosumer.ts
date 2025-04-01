@@ -47,7 +47,7 @@ async function consumeOrderEmailMessages(channel: Channel): Promise<void> {
     if (!channel) {
       channel = (await createConnection()) as Channel;
     }
-    const exchangeName = 'GigGlobal-order-notification';
+    const exchangeName = 'gigglobal-order-notification';
     const routingKey = 'order-email';
     const queueName = 'order-email-queue';
     await channel.assertExchange(exchangeName, 'direct');
