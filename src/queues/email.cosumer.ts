@@ -18,20 +18,21 @@ async function consumeAuthEmailMessages(channel: Channel): Promise<void> {
     if (!channel) {
       channel = (await createConnection()) as Channel;
     }
-    const exchangeName = '  ';
+    const exchangeName = 'gigglobal-email-notification';
     const routingKey = 'auth-email';
     const queueName = 'auth-email-queue';
     await channel.assertExchange(exchangeName, 'direct');
     const GigGlobalEmailQueue = await channel.assertQueue(queueName, { durable: true, autoDelete: false });
     await channel.bindQueue(GigGlobalEmailQueue.queue, exchangeName, routingKey);
     channel.consume(GigGlobalEmailQueue.queue, async (msg: ConsumeMessage | null) => {
-      const { receiverEmail, username, verifyLink, resetLink, template } = JSON.parse(msg!.content.toString());
+      const { receiverEmail, username, verifyLink, resetLink, template, otp } = JSON.parse(msg!.content.toString());
       const locals: IEmailLocals = {
         appLink: `${config.CLIENT_URL}`,
-        appIcon: `https://i.ibb.co/9vfD3v2`,
+        appIcon: 'https://i.ibb.co/Kyp2m0t/cover.png',
         username,
         verifyLink,
-        resetLink
+        resetLink,
+        otp
       };
 
       await sendEmail(template, receiverEmail, locals);
