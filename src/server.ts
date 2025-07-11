@@ -10,6 +10,9 @@ import { createConnection } from '@notifications/queues/connection';
 import { Channel } from 'amqplib';
 import { consumeAuthEmailMessages, consumeOrderEmailMessages } from '@notifications/queues/email.cosumer';
 
+import 'express-async-errors';
+import { errorHandler } from '@notifications/error-handler';
+
 const SERVER_PORT = 4001;
 const log: Logger = winstonLogger(
   `${config.ELASTIC_SEARCH_URL}`,
@@ -22,6 +25,7 @@ const log: Logger = winstonLogger(
 export function start(app: Application): void {
   startServer(app);
   app.use('', healthRoutes());
+  app.use(errorHandler);
   startQueues();
   startElasticSearch();
 }
@@ -30,15 +34,6 @@ async function startQueues(): Promise<void> {
   const emailChannel = (await createConnection()) as Channel;
   await consumeAuthEmailMessages(emailChannel);
   await consumeOrderEmailMessages(emailChannel);
-  // const verificationLik = `${config.CLIENT_URL}/confirm_email?v_token=12341234jljodwswe`;
-  // const messageDetails: IEmailMessageDetails = {
-  //   receiverEmail: `${config.SENDER_EMAIL}`,
-  //   verifyLink: verificationLik,
-  //   template: 'verifyEmail'
-  // };
-  // await emailChannel.assertExchange('GigGlobal-email-notification', 'direct');
-  // const message = JSON.stringify(messageDetails);
-  // emailChannel.publish('GigGlobal-email-notification', 'auth-email', Buffer.from(message));
 }
 
 function startElasticSearch(): void {
